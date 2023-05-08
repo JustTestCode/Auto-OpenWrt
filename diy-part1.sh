@@ -27,5 +27,5 @@ echo 'src-git passwall_luci https://github.com/xiaorouji/openwrt-passwall.git;lu
 ####### darkmatter主题 #######
 #echo 'src-git darkmatter git://github.com/apollo-ng/luci-theme-darkmatter.git' >>feeds.conf.default
 
-cd lede/dl
+cd dl
 wget https://sources.immortalwrt.org/ipt2socks-1.1.3.tar.gz

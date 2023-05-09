@@ -59,8 +59,8 @@ jobs:
         df -hT $PWD
         if [ ! -d "openwrt" ];then
           git clone $REPO_URL -b $REPO_BRANCH openwrt
-          ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         fi
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
     - name: Cache
       uses: klever1988/cachewrtbuild@main
       with:

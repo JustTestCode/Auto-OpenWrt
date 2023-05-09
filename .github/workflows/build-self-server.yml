@@ -57,10 +57,9 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        if [ ! -d "openwrt" ];then
-          git clone $REPO_URL -b $REPO_BRANCH openwrt
-        fi
+        git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+
     - name: Cache
       uses: klever1988/cachewrtbuild@main
       with:
@@ -78,35 +77,29 @@ jobs:
       run: |
         cd openwrt
         cd package/lean
-        rm -rf luci-app-argon-config
         git clone https://github.com/jerrykuku/luci-app-argon-config.git
 
     - name: luci-app-openclash install
       run: |
-        if [ ! -d "openwrt/package/luci-app-openclash" ];then
-          cd openwrt
-          mkdir package/luci-app-openclash
-          cd package/luci-app-openclash
-          git init
-          git remote add -f origin https://github.com/vernesong/OpenClash.git
-          git config core.sparsecheckout true
-          echo "luci-app-openclash" >> .git/info/sparse-checkout
-          git pull --depth 1 origin master
-          git branch --set-upstream-to=origin/master
-        fi
+        cd openwrt
+        mkdir package/luci-app-openclash
+        cd package/luci-app-openclash
+        git init
+        git remote add -f origin https://github.com/vernesong/OpenClash.git
+        git config core.sparsecheckout true
+        echo "luci-app-openclash" >> .git/info/sparse-checkout
+        git pull --depth 1 origin master
+        git branch --set-upstream-to=origin/master
 
     - name: luci-app-adguardhome
       run: |
         cd openwrt/package
-        rm -rf luci-app-adguardhome
         git clone https://github.com/kongfl888/luci-app-adguardhome.git
 
     - name: luci-app-mosdns
       run: |
         cd openwrt/package
-        rm -rf luci-app-mosdns
         git clone https://github.com/sbwml/luci-app-mosdns.git
-        rm -rf v2ray-geodata
         git clone https://github.com/sbwml/v2ray-geodata.git
 
     - name: Load custom feeds
